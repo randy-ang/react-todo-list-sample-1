@@ -1,0 +1,27 @@
+.toaster {
+  position: fixed;
+  bottom: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.toast {
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.toast.info {
+  background-color: #333;
+}
+
+.toast.error {
+  background-color: #d32f2f;
+}
+
+.toast.success {
+  background-color: #259d2b;
+}
