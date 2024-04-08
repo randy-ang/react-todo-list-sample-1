@@ -2,7 +2,6 @@ import { render } from '@testing-library/react'
 import { useRef } from 'react'
 import useIntersect from '../useIntersect'
 
-// Mock IntersectionObserver constructor
 global.IntersectionObserver = jest.fn()
 const mockIntersectionObserver = {
   observe: jest.fn(),

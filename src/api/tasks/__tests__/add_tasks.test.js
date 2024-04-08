@@ -14,12 +14,10 @@ describe('addTasks Behaviour', () => {
   })
 
   it('should make a POST request with correct arguments', async () => {
-    mockFetch.mockReturnValue(
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(),
-      }),
-    )
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(),
+    })
 
     const body = { task: 'some task' }
     await addTasks(body)
@@ -35,12 +33,10 @@ describe('addTasks Behaviour', () => {
 
   it('should return response data on success', async () => {
     const mockResponse = { data: 'some-data' }
-    mockFetch.mockReturnValue(
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(mockResponse),
-      }),
-    )
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(mockResponse),
+    })
 
     const body = {}
     const result = await addTasks(body)

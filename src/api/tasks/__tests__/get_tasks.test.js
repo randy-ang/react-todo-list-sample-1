@@ -18,12 +18,10 @@ describe('getTasks Behaviour', () => {
     const end = 15
 
     // Mock fetch implementation
-    mockFetch.mockReturnValue(
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(),
-      }),
-    )
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(),
+    })
 
     await getTasks({ start, end })
 
@@ -39,12 +37,10 @@ describe('getTasks Behaviour', () => {
     ]
 
     // Mock fetch implementation
-    mockFetch.mockReturnValue(
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(responseData),
-      }),
-    )
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(responseData),
+    })
 
     const start = 0
     const end = 10
@@ -57,12 +53,10 @@ describe('getTasks Behaviour', () => {
     const errorMessage = 'Server error 500'
 
     // Mock fetch implementation
-    mockFetch.mockReturnValue(
-      Promise.resolve({
-        ok: false,
-        status: 500,
-      }),
-    )
+    mockFetch.mockResolvedValue({
+      ok: false,
+      status: 500,
+    })
 
     const start = 0
     const end = 10

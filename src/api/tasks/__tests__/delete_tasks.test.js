@@ -17,12 +17,10 @@ describe('deleteTasks Behaviour', () => {
     const id = 1
 
     // Mock fetch implementation
-    mockFetch.mockReturnValue(
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(),
-      }),
-    )
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(),
+    })
 
     await deleteTasks(id)
 
@@ -35,12 +33,10 @@ describe('deleteTasks Behaviour', () => {
     const responseData = { data: 'some-data' }
 
     // Mock fetch implementation
-    mockFetch.mockReturnValue(
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve(responseData),
-      }),
-    )
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(responseData),
+    })
 
     const id = 1
     const result = await deleteTasks(id)
@@ -52,13 +48,11 @@ describe('deleteTasks Behaviour', () => {
     const responseData = {}
 
     // Mock fetch implementation for 404 error
-    mockFetch.mockReturnValue(
-      Promise.resolve({
-        ok: false,
-        status: 404,
-        json: () => Promise.resolve(responseData),
-      }),
-    )
+    mockFetch.mockResolvedValue({
+      ok: false,
+      status: 404,
+      json: () => Promise.resolve(responseData),
+    })
 
     const id = 1
     const result = await deleteTasks(id)
@@ -70,12 +64,10 @@ describe('deleteTasks Behaviour', () => {
     const errorMessage = 'Server error 500'
 
     // Mock fetch implementation for other server errors
-    mockFetch.mockReturnValue(
-      Promise.resolve({
-        ok: false,
-        status: 500,
-      }),
-    )
+    mockFetch.mockResolvedValue({
+      ok: false,
+      status: 500,
+    })
 
     const id = 1
     await expect(deleteTasks(id)).rejects.toThrow(errorMessage)
