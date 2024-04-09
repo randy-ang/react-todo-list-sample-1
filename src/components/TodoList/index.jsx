@@ -61,6 +61,7 @@ export default function TodoList() {
         }
 
         setTodos((prevData) => {
+          // if we fetch from start (0), then we reset the whole list to avoid duplicates
           if (isFetchingFromStart) {
             return actualData
           }
@@ -72,7 +73,6 @@ export default function TodoList() {
       .catch((error) => {
         showToast('Error fetching tasks', TOAST_TYPE.ERROR)
         console.error('Error fetching tasks:', error)
-        // show toaster error fetching
       })
       .finally(() => {
         setLoading(false)
@@ -100,11 +100,13 @@ export default function TodoList() {
 
   const onAddTask = (event) => {
     event.preventDefault()
-    const [taskInput] = event.target
+    const taskInput = event.target[0]
     const addedTask = taskInput.value
 
     // only add if there is value
-    if (!taskInput.value) {
+    if (!taskInput.value.trim()) {
+      showToast('Please enter a non-empty task description.', TOAST_TYPE.ERROR)
+      taskInput.value = ''
       return
     }
 
@@ -118,6 +120,8 @@ export default function TodoList() {
       .catch((err) =>
         showToast('Error adding tasks: ' + err.message, TOAST_TYPE.ERROR),
       )
+
+    taskInput.value = ''
   }
 
   const endOfListRef = useRef(null)
